@@ -5,12 +5,15 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQuery(name = "Address.findPrimaryByUserId", query = "FROM Address a WHERE a.user.id = :userId AND a.isPrimary = true ORDER BY a.id DESC")
 public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "line_one", length = 45, nullable = false)
     private String lineOne;
+    @Column(name = "address_name", length = 45)
+    private String addressName;
     @Column(name = "line_two", length = 45)
     private String lineTwo;
     @Column(name = "postal_code", length = 10)
@@ -51,6 +54,14 @@ public class Address implements Serializable {
 
     public void setLineOne(String lineOne) {
         this.lineOne = lineOne;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     public String getPostalCode() {

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQuery(name = "City.getByName", query = "FROM City c WHERE c.name = :name")
 public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

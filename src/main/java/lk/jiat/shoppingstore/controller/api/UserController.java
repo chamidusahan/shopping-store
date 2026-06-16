@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lk.jiat.shoppingstore.annotation.IsUser;
 import lk.jiat.shoppingstore.dto.UserDTO;
-import lk.jiat.shoppingstore.entity.User;
 import lk.jiat.shoppingstore.service.UserService;
 import lk.jiat.shoppingstore.util.AppUtil;
 
@@ -20,24 +19,19 @@ public class UserController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkAuth(@Context HttpServletRequest request) {
-        JsonObject response = new JsonObject();
-        HttpSession httpSession = request.getSession(false);
+        String responseJson = new UserService().getLoggedInUserProfile(request);
+        return Response.ok().entity(responseJson).build();
+    }
 
-        if (httpSession != null && httpSession.getAttribute("user") != null) {
-            UserDTO user = (UserDTO) httpSession.getAttribute("user");
-            response.addProperty("authenticated", true);
-            JsonObject userData = new JsonObject();
-            userData.addProperty("id", user.getId());
-            userData.addProperty("firstName", user.getFirstName());
-            userData.addProperty("lastName", user.getLastName());
-            userData.addProperty("fullName", user.getFirstName() + " " + user.getLastName());
-            userData.addProperty("email", user.getEmail());
-            response.add("user", userData);
-        } else {
-            response.addProperty("authenticated", false);
-        }
-
-        return Response.ok().entity(response.toString()).build();
+    @IsUser
+    @Path("/profile")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveProfile(String jsonData, @Context HttpServletRequest request) {
+        UserDTO userDTO = AppUtil.GSON.fromJson(jsonData, UserDTO.class);
+        String responseJson = new UserService().saveProfile(userDTO, request);
+        return Response.ok().entity(responseJson).build();
     }
 
     @IsUser

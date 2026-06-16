@@ -10,6 +10,7 @@ public class UserDTO implements Serializable {
     private String password;
     private String lineOne;
     private String lineTwo;
+    private String addressName;
     private String postalCode;
     private int cityId;
     private String cityName;
@@ -71,6 +72,14 @@ public class UserDTO implements Serializable {
 
     public void setLineTwo(String lineTwo) {
         this.lineTwo = lineTwo;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     public String getPostalCode() {

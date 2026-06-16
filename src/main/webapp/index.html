@@ -7,6 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --page-bg: #efe2d1;
+            --surface: #f8efe4;
+            --surface-strong: #f1e3d0;
+            --accent-dark: #5f4432;
+            --text: #2f221a;
+            --muted: #6f6258;
+            --border: #e0cdb9;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,13 +25,14 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            color: #2d2d2d;
+            color: var(--text);
             overflow-x: hidden;
+            background: var(--page-bg);
         }
 
         /* Header/Navigation */
         header {
-            background: white;
+            background: var(--surface);
             padding: 20px 0;
             position: fixed;
             width: 100%;
@@ -49,7 +60,7 @@
         .logo {
             width: 45px;
             height: 45px;
-            background: #2d2d2d;
+            background: var(--accent-dark);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -62,7 +73,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 24px;
             font-weight: 700;
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .nav-links {
@@ -76,7 +87,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #666;
+            color: var(--muted);
             font-weight: 500;
             font-size: 15px;
             transition: color 0.3s;
@@ -84,7 +95,7 @@
         }
 
         .nav-links a:hover {
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .nav-actions {
@@ -102,26 +113,26 @@
             gap: 5px;
             width: 44px;
             height: 44px;
-            border: 2px solid #2d2d2d;
+            border: 2px solid var(--accent-dark);
             border-radius: 10px;
-            background: white;
+            background: var(--surface);
             cursor: pointer;
             transition: background 0.3s, border-color 0.3s;
         }
 
         .nav-toggle:hover {
-            background: #f5f5f5;
+            background: var(--surface-strong);
         }
 
         .nav-toggle-bar {
             width: 22px;
             height: 2px;
-            background: #2d2d2d;
+            background: var(--accent-dark);
             transition: transform 0.3s, opacity 0.3s;
         }
 
         nav.nav-open .nav-toggle {
-            background: #f5f5f5;
+            background: var(--surface-strong);
         }
 
         nav.nav-open .nav-toggle-bar:nth-child(1) {
@@ -142,9 +153,9 @@
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
-            border: 2px solid #2d2d2d;
+            border: 2px solid var(--accent-dark);
             background: transparent;
-            color: #2d2d2d;
+            color: var(--accent-dark);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -152,17 +163,17 @@
 
         .account-toggle:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.2);
+            box-shadow: 0 0 0 3px rgba(122, 90, 66, 0.2);
         }
 
         .account-menu {
             position: absolute;
             top: calc(100% + 12px);
             right: 0;
-            background: white;
+            background: var(--surface);
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-            border: 1px solid #eee;
+            border: 1px solid var(--border);
             list-style: none;
             padding: 12px 0;
             min-width: 200px;
@@ -177,15 +188,15 @@
         .account-menu li a {
             display: block;
             padding: 10px 20px;
-            color: #666;
+            color: var(--muted);
             text-decoration: none;
             font-size: 14px;
             transition: background 0.2s, color 0.2s;
         }
 
         .account-menu li a:hover {
-            background: #f5f5f5;
-            color: #2d2d2d;
+            background: var(--surface-strong);
+            color: var(--text);
         }
 
         .account-menu li a.logout {
@@ -210,7 +221,7 @@
 
         /* Hero Section */
         .hero {
-            background: #f8f8f8;
+            background: linear-gradient(180deg, #f6eadc 0%, #efe2d1 100%);
             padding: 150px 20px 100px;
             margin-top: 80px;
         }
@@ -230,13 +241,13 @@
             font-weight: 900;
             margin-bottom: 20px;
             line-height: 1.1;
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .hero-text p {
             font-size: 18px;
             margin-bottom: 40px;
-            color: #666;
+            color: var(--muted);
             line-height: 1.6;
         }
 
@@ -252,25 +263,25 @@
         }
 
         .btn-black {
-            background: #2d2d2d;
+            background: var(--accent-dark);
             color: white;
             border: none;
         }
 
         .btn-black:hover {
-            background: #1a1a1a;
+            background: #4d3627;
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .btn-outline {
             background: transparent;
-            color: #2d2d2d;
-            border: 2px solid #2d2d2d;
+            color: var(--accent-dark);
+            border: 2px solid var(--accent-dark);
         }
 
         .btn-outline:hover {
-            background: #2d2d2d;
+            background: var(--accent-dark);
             color: white;
         }
 
@@ -299,7 +310,7 @@
             font-size: 42px;
             font-weight: 700;
             margin-bottom: 50px;
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .category-grid {
@@ -309,42 +320,45 @@
         }
 
         .category-card {
-            background: white;
-            border: 2px solid #eee;
+            background: var(--surface);
+            border: 2px solid var(--border);
             border-radius: 15px;
             padding: 40px 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            display: block;
+            color: #2d2d2d;
+            text-decoration: none;
         }
 
         .category-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-color: #2d2d2d;
+            border-color: var(--accent-dark);
         }
 
         .category-icon {
             font-size: 48px;
             margin-bottom: 20px;
-            color: #2d2d2d;
+            color: var(--accent-dark);
         }
 
         .category-card h3 {
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .category-card p {
-            color: #666;
+            color: var(--muted);
             font-size: 14px;
         }
 
         /* Features Section */
         .features {
-            background: #2d2d2d;
+            background: linear-gradient(180deg, #7a5a42 0%, #5f4432 100%);
             padding: 80px 20px;
             color: white;
         }
@@ -404,8 +418,8 @@
         }
 
         .product-card {
-            background: white;
-            border: 2px solid #eee;
+            background: var(--surface);
+            border: 2px solid var(--border);
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s;
@@ -415,18 +429,18 @@
         .product-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            border-color: #2d2d2d;
+            border-color: var(--accent-dark);
         }
 
         .product-image {
             width: 100%;
             height: 280px;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #f4e7d8 0%, #ead8c2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 64px;
-            color: #666;
+            color: var(--accent-dark);
         }
 
         .product-info {
@@ -437,20 +451,20 @@
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .product-price {
             font-size: 20px;
             font-weight: 700;
-            color: #2d2d2d;
+            color: var(--accent-dark);
             margin-bottom: 15px;
         }
 
         .btn-add-cart {
             width: 100%;
             padding: 12px;
-            background: #2d2d2d;
+            background: var(--accent-dark);
             color: white;
             border: none;
             border-radius: 8px;
@@ -460,14 +474,14 @@
         }
 
         .btn-add-cart:hover {
-            background: #1a1a1a;
+            background: #4d3627;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
         footer {
-            background: #1a1a1a;
+            background: #4b3728;
             color: white;
             padding: 50px 20px 30px;
         }
@@ -499,7 +513,7 @@
         }
 
         .footer-section a {
-            color: #999;
+            color: #eadfce;
             text-decoration: none;
             font-size: 14px;
             transition: color 0.3s;
@@ -512,8 +526,8 @@
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid #333;
-            color: #999;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            color: #eadfce;
             font-size: 14px;
         }
 
@@ -571,8 +585,8 @@
             .nav-links a {
                 display: block;
                 padding: 14px 16px;
-                background: white;
-                border: 1px solid #e4e4e4;
+                background: var(--surface);
+                border: 1px solid var(--border);
                 border-radius: 12px;
             }
 
@@ -592,7 +606,7 @@
             .account-menu {
                 position: static;
                 box-shadow: none;
-                border: 1px solid #e0e0e0;
+                border: 1px solid var(--border);
                 border-radius: 10px;
                 margin-top: 12px;
             }
@@ -687,8 +701,8 @@
             <h1>Elevate Your Style</h1>
             <p>Discover the latest trends in fashion. Premium quality clothing for every occasion, curated just for you.</p>
             <div class="hero-buttons">
-                <a href="#" class="btn btn-large btn-black">Shop Now</a>
-                <a href="#" class="btn btn-large btn-outline">View Collections</a>
+                <a href="categories.html" class="btn btn-large btn-black">Shop Now</a>
+                
             </div>
         </div>
         <div class="hero-image">
@@ -701,26 +715,26 @@
 <section class="categories">
     <h2 class="section-title">Shop by Category</h2>
     <div class="category-grid">
-        <div class="category-card">
+        <a class="category-card" href="categories.html?category=mens-fashion">
             <div class="category-icon"><i class="fas fa-tshirt"></i></div>
             <h3>Men's Fashion</h3>
             <p>Stylish clothing for the modern man</p>
-        </div>
-        <div class="category-card">
+        </a>
+        <a class="category-card" href="categories.html?category=womens-fashion">
             <div class="category-icon"><i class="fas fa-user-tie"></i></div>
             <h3>Women's Fashion</h3>
             <p>Elegant designs for every woman</p>
-        </div>
-        <div class="category-card">
+        </a>
+        <a class="category-card" href="categories.html?category=footwear">
             <div class="category-icon"><i class="fas fa-shoe-prints"></i></div>
             <h3>Footwear</h3>
             <p>Step out in style with our collection</p>
-        </div>
-        <div class="category-card">
+        </a>
+        <a class="category-card" href="categories.html?category=accessories">
             <div class="category-icon"><i class="fas fa-gem"></i></div>
             <h3>Accessories</h3>
             <p>Complete your look with perfect accents</p>
-        </div>
+        </a>
     </div>
 </section>
 
