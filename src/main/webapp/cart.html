@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Store - Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2d2d2d;
+            background: #f8f8f8;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: #2d2d2d;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 26px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2d2d2d;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .btn-outline {
+            padding: 10px 22px;
+            border-radius: 8px;
+            border: 2px solid #2d2d2d;
+            background: transparent;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #2d2d2d;
+        }
+
+        .btn-outline:hover {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        /* Layout */
+        main {
+            max-width: 1100px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            gap: 40px;
+        }
+
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .page-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 900;
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
+            gap: 40px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+            padding: 28px;
+            display: grid;
+            gap: 28px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .item-thumb {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #d9d9d9 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #555;
+        }
+
+        .item-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .item-info p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 14px;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .qty-control button {
+            background: transparent;
+            border: none;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .qty-control span {
+            padding: 0 16px;
+            font-weight: 600;
+        }
+
+        .remove-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #d23c3c;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .remove-link:hover {
+            color: #b12525;
+        }
+
+        .item-price {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+            padding: 28px;
+            display: grid;
+            gap: 20px;
+            align-self: start;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .summary-row.total {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d2d2d;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+            margin-top: 12px;
+        }
+
+        .btn-primary {
+            padding: 14px 18px;
+            background: #2d2d2d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .secondary-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #2d2d2d;
+            font-size: 14px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            border: 2px dashed #e4e4e4;
+            border-radius: 16px;
+            color: #777;
+        }
+
+        footer {
+            padding: 30px 20px 40px;
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: sticky;
+                top: 90px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                justify-content: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .page-title {
+                justify-content: center;
+            }
+
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                grid-template-rows: auto auto;
+            }
+
+            .item-thumb {
+                width: 80px;
+                height: 80px;
+                font-size: 24px;
+            }
+
+            .item-price {
+                grid-column: span 2;
+                justify-self: end;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .cart-items {
+                padding: 20px;
+            }
+
+            .cart-summary {
+                padding: 20px;
+            }
+
+            .item-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .summary-row {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo-container">
+            <div class="logo"><i class="fas fa-shopping-bag"></i></div>
+            <span class="brand-name">Shopping Store</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="cart.html" class="active">Cart</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a class="secondary-link" href="#"><i class="fas fa-user"></i> My Account</a>
+            <button class="btn-outline">Continue Shopping</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="page-title">
+        <h1>Your Cart</h1>
+        <span>3 items</span>
+    </div>
+
+    <div class="cart-container">
+        <section class="cart-items">
+            <article class="cart-item">
+                <div class="item-thumb"><i class="fas fa-vest"></i></div>
+                <div class="item-info">
+                    <h3>Classic Denim Jacket</h3>
+                    <p>Color: Indigo · Size: M</p>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button aria-label="Decrease quantity">−</button>
+                            <span>1</span>
+                            <button aria-label="Increase quantity">+</button>
+                        </div>
+                        <span class="remove-link">Remove</span>
+                    </div>
+                </div>
+                <strong class="item-price">$89.99</strong>
+            </article>
+
+            <article class="cart-item">
+                <div class="item-thumb"><i class="fas fa-tshirt"></i></div>
+                <div class="item-info">
+                    <h3>Summer Linen Tee</h3>
+                    <p>Color: Sand · Size: L</p>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button aria-label="Decrease quantity">−</button>
+                            <span>2</span>
+                            <button aria-label="Increase quantity">+</button>
+                        </div>
+                        <span class="remove-link">Remove</span>
+                    </div>
+                </div>
+                <strong class="item-price">$54.00</strong>
+            </article>
+
+            <article class="cart-item">
+                <div class="item-thumb"><i class="fas fa-running"></i></div>
+                <div class="item-info">
+                    <h3>Premium Runner Sneakers</h3>
+                    <p>Color: Slate · Size: 9</p>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button aria-label="Decrease quantity">−</button>
+                            <span>1</span>
+                            <button aria-label="Increase quantity">+</button>
+                        </div>
+                        <span class="remove-link">Remove</span>
+                    </div>
+                </div>
+                <strong class="item-price">$129.99</strong>
+            </article>
+        </section>
+
+        <aside class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <strong>$273.98</strong>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <strong>Free</strong>
+            </div>
+            <div class="summary-row">
+                <span>Estimated Tax</span>
+                <strong>$21.92</strong>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <strong>$295.90</strong>
+            </div>
+            <button class="btn-primary">Proceed to Checkout</button>
+            <a href="index.html" class="secondary-link"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+        </aside>
+    </div>
+
+    <section class="empty-state" aria-hidden="true">
+        <p>Need to add more? Explore our latest arrivals and best sellers to complete your look.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Shopping Store. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

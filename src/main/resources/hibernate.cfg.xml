@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/shopping_store?useSSL=false&amp;allowPublicKeyRetrieval=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">@Chamidu12345</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+
+        <mapping class="lk.jiat.shoppingstore.entity.User"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Address"/>
+        <mapping class="lk.jiat.shoppingstore.entity.BaseEntity"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Brand"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Cart"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Category"/>
+        <mapping class="lk.jiat.shoppingstore.entity.City"/>
+        <mapping class="lk.jiat.shoppingstore.entity.DeliveryType"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Gender"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Order"/>
+        <mapping class="lk.jiat.shoppingstore.entity.OrderItem"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Product"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Size"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Status"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Stock"/>
+
+
+
+    </session-factory>
+</hibernate-configuration>

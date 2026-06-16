@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - SmartTrade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+            color: #2d2d2d;
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        .page-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .page-heading h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+        }
+
+        .account-overview {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+            margin-top: 24px;
+        }
+
+        .details-header {
+            margin-bottom: 20px;
+        }
+
+        .details-header h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .details-header p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .details-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .field-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .field-group input {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font: inherit;
+            color: #2d2d2d;
+            background: #fff;
+        }
+
+        .field-group input:focus {
+            outline: none;
+            border-color: #2d2d2d;
+            box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.08);
+        }
+
+        .field-hint {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            grid-column: 1 / -1;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #2d2d2d, #595959);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 24px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .profile-email {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .profile-meta {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .profile-meta li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+            font-size: 14px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-meta li:last-child {
+            border-bottom: none;
+        }
+
+        .membership-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: rgba(45, 45, 45, 0.08);
+            color: #2d2d2d;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .account-summary {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-card {
+            border: 1px solid #eee;
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .summary-title {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .summary-value {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .tabs {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+            margin-top: 32px;
+        }
+
+        .tab-list {
+            display: flex;
+            gap: 12px;
+            padding: 24px 24px 0;
+            list-style: none;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            border: none;
+            background: #f2f2f2;
+            color: #555;
+            padding: 12px 24px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #2d2d2d;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab-content {
+            padding: 32px;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .address-card,
+        .order-card,
+        .history-card {
+            border: 1px solid #eee;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 16px;
+            background: #fafafa;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(45, 45, 45, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #2d2d2d;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .card-meta {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .ghost-button,
+        .solid-button {
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .ghost-button {
+            border: 1px solid #2d2d2d;
+            background: transparent;
+            color: #2d2d2d;
+        }
+
+        .solid-button {
+            border: none;
+            background: #2d2d2d;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: rgba(45, 45, 45, 0.08);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d2d2d;
+            font-size: 26px;
+        }
+
+        .empty-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .empty-text {
+            color: #777;
+            font-size: 14px;
+            max-width: 340px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 960px) {
+            .account-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .details-form {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-avatar {
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .page-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .tab-list {
+                padding: 16px 16px 0;
+            }
+
+            .tab-content {
+                padding: 24px 16px;
+            }
+
+            .address-card,
+            .order-card,
+            .history-card {
+                grid-template-columns: 1fr;
+            }
+
+            .card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="header-container"></div>
+
+<main>
+    <div class="page-heading">
+        <div>
+          
+            <h1>My Account</h1>
+        </div>
+        <div class="support-note">
+            <span style="color:#777; font-size:14px;">Need help? <a href="#" style="color:#2d2d2d; font-weight:600;">Contact support</a></span>
+        </div>
+    </div>
+
+    <section class="account-overview">
+        <article class="profile-card">
+            <div>
+                <div class="profile-avatar"><i class="fas fa-user"></i></div>
+                <div id="profileName" class="profile-name">Loading...</div>
+                <div id="profileEmail" class="profile-email">Loading...</div>
+                <div class="membership-badge" style="margin-bottom: 16px;"><i class="fas fa-star"></i> Joined <span id="profileJoinedAt">--</span></div>
+            </div>
+            <ul class="profile-meta">
+                <li><i class="fas fa-phone"></i> <span id="profileMobile">Not provided yet</span></li>
+                <li><i class="fas fa-map-marker-alt"></i> <span id="profileAddress">Add your address</span></li>
+                <li><i class="fas fa-calendar"></i> <span id="profileUpdatedAt">Last sign-in: --</span></li>
+            </ul>
+        </article>
+
+        <article class="details-card">
+            <div class="details-header">
+                <h2>Update contact and address details</h2>
+                <p>Fill in any missing information for your account, including address name, email, mobile number, and address fields.</p>
+            </div>
+
+            <form class="details-form">
+                <div class="field-group">
+                    <label for="addressName">Address name</label>
+                    <input id="addressName" type="text" placeholder="Home, Office, Primary Residence">
+                    <div class="field-hint">A label to identify this address.</div>
+                </div>
+
+                <div class="field-group">
+                    <label for="contactEmail">Email address</label>
+                    <input id="contactEmail" type="email" placeholder="Enter email address" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="contactMobile">Mobile number</label>
+                    <input id="contactMobile" type="text" placeholder="Enter mobile number" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="cityName">City</label>
+                    <input id="cityName" type="text" placeholder="Enter city" required>
+                </div>
+
+                <div class="field-group full-width">
+                    <label for="addressLineOne">Address line 1</label>
+                    <input id="addressLineOne" type="text" placeholder="Street address" required>
+                </div>
+
+                <div class="field-group full-width">
+                    <label for="addressLineTwo">Address line 2</label>
+                    <input id="addressLineTwo" type="text" placeholder="Apartment, suite, unit, building, floor">
+                </div>
+
+                <div class="field-group">
+                    <label for="postalCode">Postal code</label>
+                    <input id="postalCode" type="text" placeholder="Enter postal code">
+                </div>
+
+                <div class="form-actions">
+                    <button class="solid-button" type="submit">Save Details</button>
+                    <button class="ghost-button" type="reset">Clear</button>
+                </div>
+            </form>
+        </article>
+    </section>
+
+    <section class="tabs">
+        <ul class="tab-list">
+            <li><button class="tab-button active" data-tab="address">Saved Addresses</button></li>
+            <li><button class="tab-button" data-tab="orders">My Orders</button></li>
+            <li><button class="tab-button" data-tab="history">Order History</button></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="address">
+                <article class="address-card">
+                    <div class="card-icon"><i class="fas fa-home"></i></div>
+                    <div>
+                        <div class="card-title">Primary Residence</div>
+                        <div class="card-meta">Default shipping address • Updated 2 weeks ago</div>
+                        <p>451 Silver Street, San Francisco, CA 94108</p>
+                        <p>United States</p>
+                        <div class="card-actions" style="margin-top: 18px;">
+                            <button class="solid-button" type="button">Set as Default</button>
+                            <button class="ghost-button" type="button">Edit Address</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="address-card">
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                    <div>
+                        <div class="card-title">Office Pickup</div>
+                        <div class="card-meta">For workday deliveries</div>
+                        <p>275 Market Street, Suite 402, San Francisco, CA 94105</p>
+                        <div class="card-actions" style="margin-top: 18px;">
+                            <button class="ghost-button" type="button">Edit Address</button>
+                            <button class="ghost-button" type="button">Remove</button>
+                        </div>
+                    </div>
+                </article>
+                <div class="empty-state" style="background:white; border-radius:16px; border:1px dashed #d9d9d9;">
+                    <div class="empty-icon"><i class="fas fa-plus"></i></div>
+                    <div class="empty-title">Add another destination</div>
+                    <p class="empty-text">Save multiple delivery spots for faster checkout and tailored recommendations.</p>
+                    <button class="solid-button" type="button">Add Address</button>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="orders">
+                <article class="order-card">
+                    <div class="card-icon"><i class="fas fa-box"></i></div>
+                    <div>
+                        <div class="card-title">Order #ST-2026-0321</div>
+                        <div class="card-meta">Placed on Dec 28, 2025 • 3 items</div>
+                        <p>Status: Preparing for shipment. Estimated arrival Jan 6, 2026.</p>
+                        <div class="card-actions" style="margin-top: 18px;">
+                            <button class="solid-button" type="button">Track Package</button>
+                            <button class="ghost-button" type="button">View Invoice</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="order-card">
+                    <div class="card-icon"><i class="fas fa-box-open"></i></div>
+                    <div>
+                        <div class="card-title">Order #ST-2025-2874</div>
+                        <div class="card-meta">Placed on Nov 18, 2025 • 1 item</div>
+                        <p>Status: Out for delivery. Expect arrival this evening.</p>
+                        <div class="card-actions" style="margin-top: 18px;">
+                            <button class="solid-button" type="button">Track Package</button>
+                            <button class="ghost-button" type="button">Contact Support</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="tab-pane" id="history">
+                <article class="history-card">
+                    <div class="card-icon"><i class="fas fa-receipt"></i></div>
+                    <div>
+                        <div class="card-title">Completed • Sep 14, 2025</div>
+                        <div class="card-meta">Order #ST-2025-1422 • Total $189.40</div>
+                        <p>Items delivered successfully. Leave a review and earn reward points.</p>
+                        <div class="card-actions" style="margin-top: 18px;">
+                            <button class="ghost-button" type="button">Reorder</button>
+                            <button class="ghost-button" type="button">Download Invoice</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="history-card">
+                    <div class="card-icon"><i class="fas fa-receipt"></i></div>
+                    <div>
+                        <div class="card-title">Completed • Jul 01, 2025</div>
+                        <div class="card-meta">Order #ST-2025-0731 • Total $89.90</div>
+                        <p>Tropical linen shirt, Summer essentials capsule. Delivered in 3 days.</p>
+                        <div class="card-actions" style="margin-top: 18px;">
+                            <button class="ghost-button" type="button">Reorder</button>
+                            <button class="ghost-button" type="button">View Invoice</button>
+                        </div>
+                    </div>
+                </article>
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fas fa-clock"></i></div>
+                    <div class="empty-title">Looking for older records?</div>
+                    <p class="empty-text">Explore your archived purchases from previous seasons in the legacy dashboard.</p>
+                    <button class="ghost-button" type="button">Open Archives</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="assets/js/header.js"></script>
+<script src="assets/js/my-account.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const headerContainer = document.getElementById('header-container');
+
+        if (!headerContainer) {
+            return;
+        }
+
+        try {
+            const response = await fetch('header.html', {
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                console.error('Failed to load header include');
+                return;
+            }
+
+            headerContainer.innerHTML = await response.text();
+
+            if (typeof window.initializeHeader === 'function') {
+                window.initializeHeader();
+            }
+        } catch (error) {
+            console.error('Unable to inject shared header', error);
+        }
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const target = button.dataset.tab;
+
+            tabButtons.forEach((btn) => btn.classList.remove('active'));
+            tabPanes.forEach((pane) => pane.classList.remove('active'));
+
+            button.classList.add('active');
+            const targetPane = document.getElementById(target);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
