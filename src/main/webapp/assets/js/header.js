@@ -2,17 +2,22 @@
     function getMenuElements() {
         return {
             account: document.querySelector('[data-menu="account"]'),
+            admin: document.querySelector('[data-menu="admin"]'),
             signup: document.querySelector('[data-menu="signup"]'),
             signin: document.querySelector('[data-menu="signin"]'),
             logout: document.querySelector('[data-menu="logout"]')
         };
     }
 
-    function refreshAccountMenu(isAuthenticated) {
-        const { account, signup, signin, logout } = getMenuElements();
+    function refreshAccountMenu(isAuthenticated, role) {
+        const { account, admin, signup, signin, logout } = getMenuElements();
+        const isAdmin = isAuthenticated && role === 'ADMIN';
 
         if (account) {
             account.style.display = isAuthenticated ? 'block' : 'none';
+        }
+        if (admin) {
+            admin.style.display = isAdmin ? 'block' : 'none';
         }
         if (logout) {
             logout.style.display = isAuthenticated ? 'block' : 'none';
@@ -26,8 +31,13 @@
     }
 
     async function checkAuthenticationStatus() {
+        // 1. 👈 Context Path එක dynamic විදිහට ගන්නවා (404 එක නැතිවෙන්න)
+        const index = window.location.pathname.indexOf('/', 1);
+        const contextPath = index === -1 ? '' : window.location.pathname.substring(0, index);
+
         try {
-            const response = await fetch('api/users/check-auth', {
+            // URL එකට contextPath එක එකතු කළා
+            const response = await fetch(`${contextPath}/api/users/check-auth`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -41,7 +51,13 @@
             }
 
             const data = await response.json();
-            refreshAccountMenu(Boolean(data.authenticated));
+
+            // 2. 👈 ඩේටාබේස් එකෙන් එන Role එක මොන වගේ ආවත් (.toUpperCase()) කරලා සසඳනවා
+            const userRole = data.user && data.user.role ? data.user.role.toUpperCase() : null;
+
+            // නිවැරදි කරන ලද role එක refreshAccountMenu එකට පාස් කරනවා
+            refreshAccountMenu(Boolean(data.authenticated), userRole);
+
         } catch (error) {
             console.error('Unable to verify authentication status', error);
             refreshAccountMenu(false);

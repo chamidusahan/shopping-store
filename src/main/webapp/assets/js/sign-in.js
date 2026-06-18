@@ -1,9 +1,14 @@
-async function signIn() {
-    console.log("wadada bn")
+
+async function signIn(event) {
+    
+  
+    if (event) event.preventDefault();
+
     Swal.fire({
         icon: "info",
         title: "Wait...",
-
+        showConfirmButton: false, 
+        allowOutsideClick: false
     });
 
     let email = document.getElementById("email");
@@ -12,10 +17,14 @@ async function signIn() {
     const userLoginObj = {
         email: email.value,
         password: password.value
-    }
+    };
+
+   
+    const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf('/', 1));
 
     try {
-          const response = await fetch("api/users/login", {
+      
+        const response = await fetch(`${contextPath}/api/users/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,6 +35,8 @@ async function signIn() {
         if (response.ok) {
             const data = await response.json();
             if (data.status) {
+                const targetPage = "index.html";
+                
                 Swal.fire({
                     toast: true,
                     icon: 'success',
@@ -34,32 +45,28 @@ async function signIn() {
                     timer: 2000,
                     timerProgressBar: true
                 }).then(() => {
-                    window.location = "index.html";
+               
+                    window.location.href = targetPage; 
                 });
-
 
             } else {
                 Swal.fire({
-
                     text: data.message,
                     icon: "warning"
                 });
-
-
             }
         } else {
-                Swal.fire({
-                    title: "Login Failed!",
-                    text: "Please try again",
-                    icon: "error"
-                });
-            }
+            Swal.fire({
+                title: "Login Failed!",
+                text: "Server responded with an error (404/500)",
+                icon: "error"
+            });
+        }
 
     } catch (e) {
         Swal.fire({
             text: e.message,
             icon: "error"
         });
-
     }
 }

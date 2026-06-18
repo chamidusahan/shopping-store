@@ -184,6 +184,9 @@ public class UserService {
         userData.addProperty("lastName", user.getLastName());
         userData.addProperty("fullName", user.getFirstName() + " " + user.getLastName());
         userData.addProperty("email", user.getEmail());
+        if (user.getRole() != null) {
+            userData.addProperty("role", user.getRole().getName());
+        }
 
         if (address != null) {
             userData.addProperty("addressName", address.getAddressName());
@@ -271,7 +274,8 @@ public class UserService {
                             sessionUserDTO.setId(user.getId());
                             sessionUserDTO.setFirstName(user.getFirstName());
                             sessionUserDTO.setLastName(user.getLastName());
-                            sessionUserDTO.setEmail(user.getEmail());    
+                            sessionUserDTO.setEmail(user.getEmail());
+                            sessionUserDTO.setRole(user.getRole() != null ? user.getRole().getName() : null);
 
 
                             HttpSession httpSession = request.getSession(true);
@@ -279,6 +283,7 @@ public class UserService {
 
                             status = true;
                             message = "Login successful";
+                            response.addProperty("role", sessionUserDTO.getRole());
                         }
                     }
                 }
