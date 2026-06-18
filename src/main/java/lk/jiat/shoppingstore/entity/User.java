@@ -5,6 +5,7 @@ import lk.jiat.shoppingstore.dto.UserDTO;
 
 import java.util.HashSet;
 import java.util.Set;
+import lk.jiat.shoppingstore.entity.Role;
 
 @Entity
 @Table(name = "users")
@@ -25,7 +26,7 @@ public class User extends BaseEntity{
     @Column(nullable = false , length = 150, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 255)
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,6 +41,18 @@ public class User extends BaseEntity{
 
     @OneToMany(mappedBy = "user")
     private Set<Cart> carts = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    private Role role;
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     public int getId() {
         return id;
@@ -103,5 +116,13 @@ public class User extends BaseEntity{
 
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

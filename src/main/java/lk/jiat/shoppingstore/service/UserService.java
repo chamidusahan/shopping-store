@@ -6,11 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.core.Context;
 import lk.jiat.shoppingstore.dto.UserDTO;
-import lk.jiat.shoppingstore.entity.Address;
-import lk.jiat.shoppingstore.entity.City;
-import lk.jiat.shoppingstore.entity.Gender;
-import lk.jiat.shoppingstore.entity.Status;
-import lk.jiat.shoppingstore.entity.User;
+import lk.jiat.shoppingstore.entity.*;
 import lk.jiat.shoppingstore.mail.VerificationMail;
 import lk.jiat.shoppingstore.provider.MailServiceProvider;
 import lk.jiat.shoppingstore.util.AppUtil;
@@ -304,7 +300,6 @@ public class UserService {
         boolean status = false;
         String message;
 
-
         if (userDTO == null) {
             message = "Invalid request";
         } else if (userDTO.getFirstName() == null || userDTO.getFirstName().isBlank()) {
@@ -340,11 +335,18 @@ public class UserService {
 
                     user.setPassword(passwordUtil.hashPassword(userDTO.getPassword()));
 
+                    // 1. Status එක ඩේටාබේස් එකෙන් ඇදලා සෙට් කරනවා
                     Status pendingStatus = session.createNamedQuery("Status.findByValue", Status.class)
                             .setParameter("value", Status.Type.VERIFIED.name())
                             .getSingleResult();
-
                     user.setStatus(pendingStatus);
+
+                    // 2. 👈 මෙන්න අලුතින්ම එකතු කරපු කෑල්ල!
+                    // Role එක "CUSTOMER" විදිහට NamedQuery එකෙන් ඇදලා අරන් යූසර්ට සෙට් කරනවා
+                    Role defaultRole = session.createNamedQuery("Role.findByName", Role.class)
+                            .setParameter("name", "CUSTOMER")
+                            .getSingleResult();
+                    user.setRole(defaultRole);
 
                     session.persist(user);
                     tx.commit();
@@ -353,7 +355,7 @@ public class UserService {
                     message = "Account created successfully";
 
                 } catch (Exception e) {
-                    tx.rollback();
+                    if (tx != null) tx.rollback();
                     e.printStackTrace(); // DO NOT REMOVE while debugging
                     message = "Registration failed: " + e.getMessage();
                 }

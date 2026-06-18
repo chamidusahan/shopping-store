@@ -26,6 +26,7 @@
         <mapping class="lk.jiat.shoppingstore.entity.Size"/>
         <mapping class="lk.jiat.shoppingstore.entity.Status"/>
         <mapping class="lk.jiat.shoppingstore.entity.Stock"/>
+        <mapping class="lk.jiat.shoppingstore.entity.Role"/>
 
 
 
