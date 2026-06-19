@@ -464,6 +464,530 @@
                 font-size: 24px;
             }
         }
+
+        /* View Panel Visibility */
+        .view-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .view-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Products Table Section styling */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-filter-bar {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            min-width: 250px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 46px;
+            border-radius: 999px;
+            border: 2px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-dark);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(95, 68, 50, 0.12);
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            border-radius: 999px;
+            border: 2px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-dark);
+        }
+
+        .products-table-container {
+            width: 100%;
+            overflow-x: auto;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            background: var(--surface);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-top: 20px;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 800px;
+        }
+
+        .products-table th {
+            padding: 16px 20px;
+            border-bottom: 2px solid var(--border);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .products-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            vertical-align: middle;
+            transition: background 0.2s;
+        }
+
+        .products-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .products-table tr:hover td {
+            background: var(--surface-strong);
+        }
+
+        .product-media {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .product-img {
+            width: 54px;
+            height: 54px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            background: var(--surface-strong);
+        }
+
+        .product-title-cell {
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .product-desc-cell {
+            margin: 4px 0 0;
+            font-size: 12px;
+            color: var(--muted);
+            max-width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        .badge-category {
+            background: rgba(95, 68, 50, 0.12);
+            color: var(--accent-dark);
+        }
+
+        .badge-brand {
+            background: var(--surface-strong);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .badge-gender {
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .badge-gender.men {
+            background: #e3edf7;
+            color: #1a5c96;
+        }
+        .badge-gender.women {
+            background: #fdebf2;
+            color: #b82c67;
+        }
+        .badge-gender.unisex {
+            background: #edf7ed;
+            color: #2e7d32;
+        }
+
+        .size-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: var(--surface-strong);
+            border: 1px solid var(--border);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text);
+            margin-right: 4px;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            color: white;
+        }
+
+        .action-btn.edit:hover {
+            background: var(--accent-dark);
+            border-color: var(--accent-dark);
+        }
+
+        .action-btn.delete:hover {
+            background: #d32f2f;
+            border-color: #d32f2f;
+        }
+
+        /* Form styling */
+        .form-card {
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            background: var(--surface);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .form-col-full {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-control {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: var(--surface-strong);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-dark);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(95, 68, 50, 0.12);
+        }
+
+        .form-control.invalid {
+            border-color: #d32f2f;
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 20px;
+            padding-top: 8px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .radio-label input[type="radio"] {
+            accent-color: var(--accent-dark);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* Customizable Chip checkboxes */
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chip-checkbox {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .chip-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 46px;
+            height: 44px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: var(--surface-strong);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+            font-size: 13px;
+        }
+
+        .chip-label:hover {
+            border-color: var(--accent-dark);
+            background: var(--surface);
+        }
+
+        .chip-checkbox:checked + .chip-label {
+            background: var(--accent-dark);
+            color: white;
+            border-color: var(--accent-dark);
+            box-shadow: 0 4px 10px rgba(95, 68, 50, 0.2);
+        }
+
+        /* Image URL uploads / previews */
+        .image-upload-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .image-previews-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .image-preview-slot {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+            background: var(--surface-strong);
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .image-preview-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-preview-slot.empty-slot {
+            color: var(--muted);
+            font-size: 20px;
+        }
+
+        .remove-img-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            font-size: 10px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .image-preview-slot:hover .remove-img-btn {
+            opacity: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 32px;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .toast-message {
+            background: var(--accent-dark);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+        }
+
+        .toast-message.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-message.success {
+            border-left: 4px solid #4caf50;
+        }
+
+        .toast-message.error {
+            border-left: 4px solid #f44336;
+        }
+
+        /* Coming Soon Panel */
+        .coming-soon-card {
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            background: var(--surface);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 48px;
+            text-align: center;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+
+        .coming-soon-card i {
+            font-size: 48px;
+            color: var(--accent-dark);
+            margin-bottom: 20px;
+        }
+
+        .coming-soon-card h2 {
+            margin: 0 0 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .coming-soon-card p {
+            color: var(--muted);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-col-full {
+                grid-column: span 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -473,14 +997,14 @@
         <h3>Menu</h3>
     </div>
     <ul class="sidebar-menu">
-        <li><a href="#" class="active"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
-        <li><a href="#"><i class="fas fa-boxes-stacked"></i> <span>Products</span></a></li>
-        <li><a href="#"><i class="fas fa-plus-circle"></i> <span>Add Product</span></a></li>
-        <li><a href="#"><i class="fas fa-bag-shopping"></i> <span>Orders</span></a></li>
-        <li><a href="#"><i class="fas fa-users"></i> <span>Customers</span></a></li>
-        <li><a href="#"><i class="fas fa-file-chart-line"></i> <span>Reports</span></a></li>
-        <li><a href="#"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a></li>
-        <li><a href="#"><i class="fas fa-cogs"></i> <span>Settings</span></a></li>
+        <li><a href="#" class="active" id="nav-dashboard" onclick="switchView('dashboard', event)"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+        <li><a href="#" id="nav-products" onclick="switchView('products', event)"><i class="fas fa-boxes-stacked"></i> <span>Products</span></a></li>
+        <li><a href="#" id="nav-add-product" onclick="switchView('addProduct', event)"><i class="fas fa-plus-circle"></i> <span>Add Product</span></a></li>
+        <li><a href="#" id="nav-orders" onclick="switchView('orders', event)"><i class="fas fa-bag-shopping"></i> <span>Orders</span></a></li>
+        <li><a href="#" id="nav-customers" onclick="switchView('customers', event)"><i class="fas fa-users"></i> <span>Customers</span></a></li>
+        <li><a href="#" id="nav-reports" onclick="switchView('reports', event)"><i class="fas fa-file-chart-line"></i> <span>Reports</span></a></li>
+        <li><a href="#" id="nav-analytics" onclick="switchView('analytics', event)"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a></li>
+        <li><a href="#" id="nav-settings" onclick="switchView('settings', event)"><i class="fas fa-cogs"></i> <span>Settings</span></a></li>
     </ul>
 </aside>
 
@@ -500,108 +1024,287 @@
         </div>
     </section>
 
-    <section class="hero">
-        <div class="hero-panel">
-            <span class="eyebrow"><i class="fas fa-lock"></i> Restricted area</span>
-            <h2>Manage the store from one control center.</h2>
-            <p>
-                Track orders, review inventory, and keep customer activity organized from a focused admin workspace.
-                Customers are redirected away from this page automatically.
-            </p>
+    <!-- 1. Dashboard View Panel -->
+    <div id="dashboardView" class="view-panel active">
+        <section class="hero">
+            <div class="hero-panel">
+                <span class="eyebrow"><i class="fas fa-lock"></i> Restricted area</span>
+                <h2>Manage the store from one control center.</h2>
+                <p>
+                    Track orders, review inventory, and keep customer activity organized from a focused admin workspace.
+                    Customers are redirected away from this page automatically.
+                </p>
 
-            <div class="quick-actions">
-                <div class="action-card">
-                    <i class="fas fa-boxes-stacked"></i>
-                    <h3>Inventory</h3>
-                    <p>Update stock levels, availability, and product readiness.</p>
-                </div>
-                <div class="action-card">
-                    <i class="fas fa-bag-shopping"></i>
-                    <h3>Orders</h3>
-                    <p>Review pending, paid, and dispatched orders in one place.</p>
-                </div>
-                <div class="action-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Users</h3>
-                    <p>Keep customer accounts and access policy under control.</p>
-                </div>
-            </div>
-        </div>
-
-        <aside class="stats-panel">
-            <h3>Today</h3>
-            <div class="stat-grid">
-                <div class="stat">
-                    <span class="stat-label">New orders</span>
-                    <div class="stat-value" id="newOrdersCount">24</div>
-                    <div class="stat-note">+8% from yesterday</div>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Low stock items</span>
-                    <div class="stat-value" id="lowStockCount">7</div>
-                    <div class="stat-note">Needs attention</div>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Active customers</span>
-                    <div class="stat-value" id="activeCustomerCount">138</div>
-                    <div class="stat-note">Steady traffic</div>
-                </div>
-            </div>
-        </aside>
-    </section>
-
-    <section class="content-grid">
-        <div class="section-card">
-            <h3 class="section-title">Operational Queue</h3>
-            <div class="table">
-                <div class="table-row">
-                    <strong>Orders</strong>
-                    <span>5 pending approvals and 3 dispatches waiting for review.</span>
-                    <span class="status warn">Needs review</span>
-                </div>
-                <div class="table-row">
-                    <strong>Catalog</strong>
-                    <span>12 product updates were published in the latest sync.</span>
-                    <span class="status ok">Up to date</span>
-                </div>
-                <div class="table-row">
-                    <strong>Customers</strong>
-                    <span>Verification and profile updates are processed automatically.</span>
-                    <span class="status ok">Healthy</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card">
-            <h3 class="section-title">Admin Notes</h3>
-            <div class="activity-list">
-                <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-triangle-exclamation"></i></div>
-                    <div>
-                        <h4>Review stock alerts</h4>
-                        <p>Items with low inventory should be restocked before the next peak period.</p>
+                <div class="quick-actions">
+                    <div class="action-card" style="cursor: pointer;" onclick="switchView('products')">
+                        <i class="fas fa-boxes-stacked"></i>
+                        <h3>Inventory</h3>
+                        <p>Update stock levels, availability, and product readiness.</p>
                     </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-chart-line"></i></div>
-                    <div>
-                        <h4>Monitor conversion</h4>
-                        <p>Keep an eye on product pages and sign-in success to catch drop-offs early.</p>
+                    <div class="action-card" style="cursor: pointer;" onclick="switchView('orders')">
+                        <i class="fas fa-bag-shopping"></i>
+                        <h3>Orders</h3>
+                        <p>Review pending, paid, and dispatched orders in one place.</p>
                     </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-user-shield"></i></div>
-                    <div>
-                        <h4>Access control</h4>
-                        <p>Only ADMIN users can stay on this page. Everyone else is redirected away.</p>
+                    <div class="action-card" style="cursor: pointer;" onclick="switchView('customers')">
+                        <i class="fas fa-users"></i>
+                        <h3>Users</h3>
+                        <p>Keep customer accounts and access policy under control.</p>
                     </div>
                 </div>
             </div>
-            <div class="footer-note">This dashboard is a starter surface and can be extended with real management panels next.</div>
+
+            <aside class="stats-panel">
+                <h3>Today</h3>
+                <div class="stat-grid">
+                    <div class="stat">
+                        <span class="stat-label">New orders</span>
+                        <div class="stat-value" id="newOrdersCount">24</div>
+                        <div class="stat-note">+8% from yesterday</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Low stock items</span>
+                        <div class="stat-value" id="lowStockCount">7</div>
+                        <div class="stat-note">Needs attention</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Active customers</span>
+                        <div class="stat-value" id="activeCustomerCount">138</div>
+                        <div class="stat-note">Steady traffic</div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="content-grid">
+            <div class="section-card">
+                <h3 class="section-title">Operational Queue</h3>
+                <div class="table">
+                    <div class="table-row">
+                        <strong>Orders</strong>
+                        <span>5 pending approvals and 3 dispatches waiting for review.</span>
+                        <span class="status warn">Needs review</span>
+                    </div>
+                    <div class="table-row">
+                        <strong>Catalog</strong>
+                        <span>12 product updates were published in the latest sync.</span>
+                        <span class="status ok">Up to date</span>
+                    </div>
+                    <div class="table-row">
+                        <strong>Customers</strong>
+                        <span>Verification and profile updates are processed automatically.</span>
+                        <span class="status ok">Healthy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-title">Admin Notes</h3>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                        <div>
+                            <h4>Review stock alerts</h4>
+                            <p>Items with low inventory should be restocked before the next peak period.</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-chart-line"></i></div>
+                        <div>
+                            <h4>Monitor conversion</h4>
+                            <p>Keep an eye on product pages and sign-in success to catch drop-offs early.</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-user-shield"></i></div>
+                        <div>
+                            <h4>Access control</h4>
+                            <p>Only ADMIN users can stay on this page. Everyone else is redirected away.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-note">This dashboard is a starter surface and can be extended with real management panels next.</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. Products View Panel -->
+    <div id="productsView" class="view-panel">
+        <div class="products-header" style="margin-top: 24px;">
+            <div class="search-filter-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="productSearchInput" placeholder="Search products by title..." oninput="filterProductsTable()">
+                </div>
+                <select id="filterCategory" class="filter-select" onchange="filterProductsTable()">
+                    <option value="">All Categories</option>
+                    <option value="Casualwear">Casualwear</option>
+                    <option value="Formalwear">Formalwear</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Footwear">Footwear</option>
+                </select>
+                <select id="filterBrand" class="filter-select" onchange="filterProductsTable()">
+                    <option value="">All Brands</option>
+                    <option value="Elegance">Elegance</option>
+                    <option value="Urban Fit">Urban Fit</option>
+                    <option value="Classic Thread">Classic Thread</option>
+                    <option value="ActiveWear">ActiveWear</option>
+                </select>
+                <select id="filterGender" class="filter-select" onchange="filterProductsTable()">
+                    <option value="">All Genders</option>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Unisex">Unisex</option>
+                </select>
+                <button class="pill primary" onclick="switchView('addProduct')" style="border-radius: 999px; height: 46px;"><i class="fas fa-plus"></i> Add Product</button>
+            </div>
         </div>
-    </section>
+
+        <div class="products-table-container">
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>Product Details</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Gender</th>
+                        <th>Available Sizes</th>
+                        <th style="width: 100px; text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                    <!-- Dynamic Product Rows will go here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 3. Add Product View Panel -->
+    <div id="addProductView" class="view-panel">
+        <div style="margin-top: 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+            <h2 style="margin: 0; font-family: 'Montserrat', sans-serif;">Add New Product</h2>
+            <button class="pill" onclick="switchView('products')"><i class="fas fa-arrow-left"></i> Back to Products</button>
+        </div>
+
+        <div class="form-card">
+            <form id="addProductForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-grid">
+                    <!-- Title -->
+                    <div class="form-group form-col-full">
+                        <label for="productTitle">Product Title <span style="color:#d32f2f;">*</span></label>
+                        <input type="text" id="productTitle" class="form-control" placeholder="e.g. Premium Cotton Oxford Shirt">
+                        <div id="error-title" class="error-message">Product title is required.</div>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="form-group">
+                        <label for="productCategory">Category <span style="color:#d32f2f;">*</span></label>
+                        <select id="productCategory" class="form-control">
+                            <option value="">Select Category</option>
+                            <option value="Casualwear">Casualwear</option>
+                            <option value="Formalwear">Formalwear</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Footwear">Footwear</option>
+                        </select>
+                        <div id="error-category" class="error-message">Category is required.</div>
+                    </div>
+
+                    <!-- Brand -->
+                    <div class="form-group">
+                        <label for="productBrand">Brand <span style="color:#d32f2f;">*</span></label>
+                        <select id="productBrand" class="form-control">
+                            <option value="">Select Brand</option>
+                            <option value="Elegance">Elegance</option>
+                            <option value="Urban Fit">Urban Fit</option>
+                            <option value="Classic Thread">Classic Thread</option>
+                            <option value="ActiveWear">ActiveWear</option>
+                        </select>
+                        <div id="error-brand" class="error-message">Brand is required.</div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="form-group">
+                        <label>Gender <span style="color:#d32f2f;">*</span></label>
+                        <div class="gender-options">
+                            <label class="radio-label">
+                                <input type="radio" name="productGender" value="Men" checked> Men
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="productGender" value="Women"> Women
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="productGender" value="Unisex"> Unisex
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sizes -->
+                    <div class="form-group">
+                        <label>Available Sizes</label>
+                        <div class="chip-group">
+                            <input type="checkbox" id="size-S" value="S" class="chip-checkbox">
+                            <label for="size-S" class="chip-label">S</label>
+
+                            <input type="checkbox" id="size-M" value="M" class="chip-checkbox">
+                            <label for="size-M" class="chip-label">M</label>
+
+                            <input type="checkbox" id="size-L" value="L" class="chip-checkbox">
+                            <label for="size-L" class="chip-label">L</label>
+
+                            <input type="checkbox" id="size-XL" value="XL" class="chip-checkbox">
+                            <label for="size-XL" class="chip-label">XL</label>
+
+                            <input type="checkbox" id="size-XXL" value="XXL" class="chip-checkbox">
+                            <label for="size-XXL" class="chip-label">XXL</label>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group form-col-full">
+                        <label for="productDescription">Description <span style="color:#d32f2f;">*</span></label>
+                        <textarea id="productDescription" class="form-control" placeholder="Describe the style, fit, and fabric of this product..."></textarea>
+                        <div id="error-description" class="error-message">Description is required.</div>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group form-col-full image-upload-wrapper">
+                        <label>Product Images (Add URLs or type image descriptions)</label>
+                        <div style="display: flex; gap: 12px;">
+                            <input type="text" id="imageInput" class="form-control" placeholder="https://example.com/product-image.jpg" style="flex-grow: 1;">
+                            <button type="button" class="pill primary" onclick="addImageUrl()" style="border-radius: 8px; padding: 12px 20px;">Add Image</button>
+                        </div>
+                        <div class="image-previews-grid" id="imagePreviewsGrid">
+                            <!-- Empty slots display by default -->
+                            <div class="image-preview-slot empty-slot" id="slot-0"><i class="fas fa-image"></i></div>
+                            <div class="image-preview-slot empty-slot" id="slot-1"><i class="fas fa-image"></i></div>
+                            <div class="image-preview-slot empty-slot" id="slot-2"><i class="fas fa-image"></i></div>
+                            <div class="image-preview-slot empty-slot" id="slot-3"><i class="fas fa-image"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="pill" onclick="switchView('products')">Cancel</button>
+                    <button type="submit" class="pill primary" id="saveProductBtn"><i class="fas fa-save"></i> Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Placeholder View for others -->
+    <div id="comingSoonView" class="view-panel">
+        <div class="coming-soon-card">
+            <i class="fas fa-hourglass-half"></i>
+            <h2 id="comingSoonTitle">Coming Soon</h2>
+            <p id="comingSoonText">This panel is under active development. Real management features are coming soon!</p>
+            <button class="pill primary" onclick="switchView('dashboard')" style="margin-top: 24px;">Back to Dashboard</button>
+        </div>
+    </div>
 </main>
 </div>
+
+<!-- Toast Notifications Container -->
+<div class="toast-container" id="toastContainer"></div>
 
 <script src="assets/js/admin-dashboard.js"></script>
 </body>
